@@ -1,6 +1,9 @@
 services:
   gallery:
-    image: 'php:8.2.28-fpm'
+    #image: 'php:8.2.28-fpm'
+    build:
+      context:
+        ./docker    
     volumes:
       - "./:/var/www"
     networks:

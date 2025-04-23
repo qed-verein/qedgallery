@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 require_once 'DB/DataObject.php';
 require_once 'include/config.php';
 require_once 'include/error.php';
@@ -12,4 +12,5 @@ require_once 'views/html_common.php';
 require_once 'views/layout.php';
 require_once 'include/init.php';
 
+error_reporting(0);
 ?>
