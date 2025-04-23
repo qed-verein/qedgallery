@@ -1,0 +1,44 @@
+services:
+  gallery:
+    image: 'php:8.2.28-fpm'
+    volumes:
+      - "./:/var/www"
+    networks:
+        - qedgallery
+    working_dir: /var/www/
+    post_start:
+      - command: "docker-php-ext-install mysqli exif"
+    depends_on:
+      sql:
+        condition: service_healthy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8000:80"
+    networks:
+        - qedgallery
+    volumes:
+      - "./:/var/www"
+      - "./docker/nginx/:/etc/nginx/conf.d/"
+    depends_on:
+      gallery:
+        condition: service_started
+  sql:
+    image: mariadb
+    hostname: sql
+    environment:
+      - MARIADB_ROOT_PASSWORD=s3cr3t
+    networks:
+      - qedgallery
+    post_start:
+      - command: "sh -c 'sleep 8 && mariadb --password=s3cr3t </root/schema.sql'"
+    volumes:
+      - "./schema.sql:/root/schema.sql"
+    healthcheck:
+      start_period: 10s
+      test: "true"
+
+
+networks:
+  qedgallery:
+

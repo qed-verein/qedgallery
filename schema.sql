@@ -1,3 +1,5 @@
+CREATE DATABASE qedgallerysql1;
+USE qedgallerysql1;
 CREATE TABLE album (
 	id           INT PRIMARY KEY AUTO_INCREMENT,
 	ownerId      INT NOT NULL,
