@@ -38,7 +38,7 @@ require_once 'DB.php';
  * @author     Stig Bakken <stig@php.net>
  * @copyright  1997-2007 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    Release: 1.9.2
+ * @version    Release: 1.10.0
  * @link       http://pear.php.net/package/DB
  */
 class DB_storage extends PEAR
@@ -336,7 +336,7 @@ class DB_storage extends PEAR
         }
         reset($rowdata);
         $found_keycolumn = false;
-        while (list($key, $value) = each($rowdata)) {
+        foreach ($rowdata as $key => $value) {
             if ($key == $this->_keycolumn) {
                 $found_keycolumn = true;
             }

@@ -83,7 +83,7 @@ class DB_DataObject_Links
      *  @param {Array}           cfg  Configuration (basically properties of this object)
      */
     
-    function DB_DataObject_Links($do,$cfg= array())
+    function __construct($do,$cfg= array())
     {
         // check if do is set!!!?
         $this->do = $do;
@@ -203,7 +203,6 @@ class DB_DataObject_Links
     
     function linkInfo($field)
     {
-         
         if (is_array($field)) {
             if (count($field) == 3) {
                 // array with 3 args:
@@ -226,7 +225,8 @@ class DB_DataObject_Links
         }
         // work out the link.. (classic way)
         
-        $links = $this->do->links();
+        // if (is_object($this->do))
+            $links = $this->do->links();
         
         if (empty($links) || !is_array($links)) {
              
