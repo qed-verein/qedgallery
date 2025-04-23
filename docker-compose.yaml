@@ -8,6 +8,7 @@ services:
     working_dir: /var/www/
     post_start:
       - command: "docker-php-ext-install mysqli exif"
+      - command: "sh -c 'pear install mdb2 mdb2#mysqli || true'"
     depends_on:
       sql:
         condition: service_healthy
@@ -31,7 +32,7 @@ services:
     networks:
       - qedgallery
     post_start:
-      - command: "sh -c 'sleep 8 && mariadb --password=s3cr3t </root/schema.sql'"
+      - command: "sh -c 'sleep 8 && mariadb --password=s3cr3t </root/schema.sql || true'"
     volumes:
       - "./schema.sql:/root/schema.sql"
     healthcheck:
