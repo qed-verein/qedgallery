@@ -27,6 +27,10 @@ body {
   right: 0;
 }
 
+.side-hover:hover, .footer-hover:hover {
+  background-color: rgba(128, 128, 128, 0.25);
+}
+
 .side-hover > * {
   display: none;
   position: absolute;
@@ -37,7 +41,11 @@ body {
   font-weight: bold;
 }
 
-.side-hover:hover > *{
+.side-hover:hover > * {
+  display: unset;
+}
+
+.side-hover:hover > * {
   display: unset;
 }
 
@@ -72,7 +80,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.footer-hover:hover > *{
+.footer-hover:hover > * {
   display: unset;
 }
 
