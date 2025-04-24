@@ -46,6 +46,7 @@ class ImageRendererNeu
 
     $prevIcon = "<img width=64 src='style/go-previous.png' alt='Zum vorherigen Bild' />";
     $nextIcon = "<img width=64 src='style/go-next.png' alt='Zum nächsten Bild' />";
+    $albumIcon = "<img width=64 src='style/folder.png' alt='Zurück zum Album' />";
 
 		if(is_null($this->prevId))
 			$linkPrev = "";
@@ -58,25 +59,18 @@ class ImageRendererNeu
 		else
 			$linkNext = sprintf("<a href='%s' id='rightarrow' class='side-hover'>%s</a>\n",
 				htmlText(urlImageViewNeu($this->nextId, $this->filter)), $nextIcon);
+   
+    $pageIndex = imageSequence($this->image, 'position', $this->filter) / IMAGES_PER_PAGE + 1;
+    
+    $linkAlbum = sprintf("<a href='%s' id='backtoalbum' class='footer-hover'>%s</a>\n",
+      htmlText(urlAlbumView($this->album->id, $this->filter, $pageIndex)), $albumIcon);
 
     $html = $linkPrev;
     $html .= $linkNext;
+    $html .= $linkAlbum;
     
 		return $html;
 	}
-
-	//~ function renderNavigation()
-	//~ {
-		//~ $pageIndex = imageSequence($this->image, 'position', $this->filter) / IMAGES_PER_PAGE + 1;
-		//~ $linkAlbum = sprintf("<a href='%s'>zurück zum Album</a>",
-			//~ htmlText(urlAlbumView($this->album->id, $this->filter, $pageIndex)));
-
-		//~ $html  = "<div style='text-align: center; margin: 5mm'>\n";
-		//~ $html .= $linkAlbum;
-		//~ $html .= "</div>\n";
-		//~ return $html;
-	//~ }
-	
 
 	function renderImageBox()
 	{

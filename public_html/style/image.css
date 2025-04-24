@@ -26,6 +26,7 @@ body {
   bottom: 0;
   right: 0;
 }
+
 .side-hover > * {
   display: none;
   position: absolute;
@@ -53,5 +54,32 @@ body {
 }
 
 #rightarrow > * {
+  left: 50%;
+}
+
+.footer-hover {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.footer-hover > * {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.footer-hover:hover > *{
+  display: unset;
+}
+
+#backtoalbum {
+  top: 90vh;
+}
+
+#backtoalbum > * {
   left: 50%;
 }
