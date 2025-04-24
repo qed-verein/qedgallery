@@ -12,5 +12,5 @@ require_once 'views/html_common.php';
 require_once 'views/layout.php';
 require_once 'include/init.php';
 
-error_reporting(0);
+error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 ?>

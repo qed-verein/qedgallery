@@ -152,7 +152,7 @@ class ImageRenderer
 
 		$linkOriginal = sprintf(
 			"<a href='%s'><img src='style/view-fullscreen.png' alt='In Originalgröße anzeigen'></a>",
-				htmlText(urlImageViewNeu($this->image->id)));
+				htmlText(urlImageViewNeu($this->image->id, $this->filter)));
 
 		$linkDownload= sprintf(
 			"<a href='%s'><img src='style/document-save.png' alt='Herunterladen'></a>",

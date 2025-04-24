@@ -24,7 +24,7 @@ $album = $image->getLink('albumId');
 
 $imageRenderer = new ImageRendererNeu($image);
 echo renderImageLayout(
-    "Bild anzeigen TODO", 
+    sprintf("Bild anzeigen: %s", $image->title),
     $imageRenderer->render());
 
 ?>
