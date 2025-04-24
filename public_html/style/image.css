@@ -1,0 +1,57 @@
+body {
+  margin: 0px;
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+}
+
+#mainimage {
+  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.side-hover {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+.side-hover > * {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: grey;
+  font-size: 10vh;
+  font-weight: bold;
+}
+
+.side-hover:hover > *{
+  display: unset;
+}
+
+#leftarrow {
+  right: 90vw;
+}
+
+#leftarrow > * {
+  left: 50%;
+}
+
+#rightarrow {
+  left: 90vw;
+}
+
+#rightarrow > * {
+  left: 50%;
+}

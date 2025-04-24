@@ -40,6 +40,9 @@ function urlImageDelete($imageId) {
 function urlImageView($imageId, $filter = array()) {
 	return sprintf("image_view.php?imageid=%d%s", $imageId, filterParameters($filter));
 }
+function urlImageViewNeu($imageId, $filter = array()) {
+	return sprintf("image_view_neu.php?imageid=%d%s", $imageId, filterParameters($filter));
+}
 
 function urlImageRotateLeft($imageId) {
 	return sprintf("image_edit.php?rotate=left&imageid=%d", $imageId); }

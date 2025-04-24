@@ -161,4 +161,15 @@ function renderSimpleLayout($title, $content)
 	return $html;
 }
 
+function renderImageLayout($title, $content)
+{
+	$html = "<!DOCTYPE html>";
+	$html .= "<html>\n" . "<head>\n";
+	$html .= "<link rel='stylesheet' href='style/image.css'>\n";
+	$html .= "<title>" . htmlText($title) . "</title>\n";
+	$html .= "</head>\n<body>\n" . $content . "</body>\n</html>\n";
+	return $html;
+}
+
+
 ?>
