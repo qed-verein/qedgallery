@@ -23,7 +23,8 @@ function mimeIcon($mimeType)
 	$mimeClass = explode('/', $mimeType);
 	$mimeClass = $mimeClass[0];
 
-	if($mimeType == 'image/jpeg' || $mimeType == 'image/png' || $mimeType == 'image/heic' || $mimeType == 'image/heif') return false;
+	if($mimeType == 'image/jpeg' || $mimeType == 'image/png' || $mimeType == 'image/heic' || $mimeType == 'image/heif'
+     || $mimeType == 'image/svg+xml') return false;
 	if($mimeType == 'text/html') return "text-html.png";
 	//if($image->mimeType == 'application/pdf') return "x-office-document.png";
 

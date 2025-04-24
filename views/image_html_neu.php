@@ -30,6 +30,18 @@ class ImageRendererNeu
 		$this->nextId  = imageSequence($this->image, 'nextId', $this->filter);
 	}
 
+	function renderVideoBox()
+	{
+		return sprintf("<video src='%s' preload='none' controls id='mainimage' style='z-index: 1'></video>\n", 
+			htmlText(urlImageOriginal($this->image->id)));
+	}
+
+	function renderAudioBox()
+	{
+		return sprintf("<audio src='%s' preload='none' controls id='mainimage'></video>\n", 
+			htmlText(urlImageOriginal($this->image->id)));
+	}
+
 	function renderNavigation()
 	{
 /*		if($this->image->id == $this->firstId)
@@ -78,16 +90,16 @@ class ImageRendererNeu
       htmlText(urlImageOriginal($this->image->id)),
       htmlText($this->image->title));
 
+   $mimeClass = explode('/', $this->image->mimeType);
+   $mimeClass = $mimeClass[0];
+   if($mimeClass == 'video')
+     $htmlImage = $this->renderVideoBox();
+   elseif($mimeClass == 'audio')
+     $htmlImage = $this->renderAudioBox();
+
    $html = "<div class='container'>\n";
    $html .= $htmlImage;
    $html .= "</div>\n"; 
-		
-		//~ $mimeClass = explode('/', $this->image->mimeType);
-		//~ $mimeClass = $mimeClass[0];
-		//~ if($mimeClass == 'video')
-			//~ $htmlImage = $this->renderVideoBox();
-		//~ elseif($mimeClass == 'audio')
-			//~ $htmlImage = $this->renderAudioBox();
 
 		return $html;
 	}
