@@ -17,6 +17,13 @@ body {
   height: 100vh;
 }
 
+@supports (height: 100dvh) {
+  .container{
+     width: 100dvw;
+     height: 100dvh;
+  }
+}
+
 .hover-button {
   position: fixed;
   left: 0;

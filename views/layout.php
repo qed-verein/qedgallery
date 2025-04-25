@@ -166,6 +166,7 @@ function renderImageLayout($title, $content)
 	$html = "<!DOCTYPE html>";
 	$html .= "<html>\n" . "<head>\n";
 	$html .= "<link rel='stylesheet' href='style/image.css'>\n";
+	$html .= "<meta name='viewport' content='width=device-width, initial-scale=1' />";
 	$html .= "<title>" . htmlText($title) . "</title>\n";
 	$html .= "</head>\n<body>\n" . $content . "</body>\n</html>\n";
 	return $html;
