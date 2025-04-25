@@ -38,9 +38,9 @@ function urlImageEdit($imageId) {
 function urlImageDelete($imageId) {
 	return sprintf("image_delete.php?imageid=%d", $imageId); }
 function urlImageDetails($imageId, $filter = array()) {
-	return sprintf("image_view.php?imageid=%d%s&mode=details", $imageId, filterParameters($filter)); }
-function urlImageView($imageId, $filter = array()) {
 	return sprintf("image_view.php?imageid=%d%s", $imageId, filterParameters($filter)); }
+function urlImageView($imageId, $filter = array()) {
+	return sprintf("image_view.php?imageid=%d%s&mode=fullscreen", $imageId, filterParameters($filter)); }
 
 function urlImageRotateLeft($imageId) {
 	return sprintf("image_edit.php?rotate=left&imageid=%d", $imageId); }

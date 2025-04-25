@@ -8,7 +8,7 @@ require_once('views/image_html_neu.php');
 define('L_IMAGE_VIEW', "Bild anzeigen");
 
 $imageId = paramInt('imageid');
-$mode = paramString('mode', 'fullscreen');
+$mode = paramString('mode', 'details');
 
 
 if(!testImagePermissions(PERM_VIEW, $imageId))
