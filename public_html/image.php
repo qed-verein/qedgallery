@@ -92,7 +92,10 @@ if(isset($_SERVER['HTTP_RANGE']))
 	http_response_code(206);
 }
 
-header("Content-Type: " . $image->mimeType);
+if($type == 'original')
+  header("Content-Type: " . $image->mimeType);
+else
+  header("Content-Type: image/jpeg");
 header("Cache-Control: private, max-age=604800");
 header("Expires: " . gmdate('D, d M Y H:i:s \G\M\T', time() + 604800));
 header("Pragma: cache");
