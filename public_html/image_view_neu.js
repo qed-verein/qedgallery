@@ -1,3 +1,4 @@
+var touchFingers;
 var touchstartX, touchstartY;
 var touchendX, touchendY;
 var body = document.body;
@@ -18,7 +19,10 @@ function onDownSwipe() {
 }
 
 function handleGesture() {
-  var threshold = Math.min(window.screen.width, window.screen.height) * 0.2;
+  var zoom = window.visualViewport.scale;
+  var threshold = Math.min(window.screen.width, window.screen.height) * 0.125;
+  if(zoom >= 1.02) return;
+
   if(Math.abs(touchendY - touchstartY) < threshold) {
     if(touchendX - touchstartX < -threshold) {
       onLeftSwipe();
@@ -36,13 +40,15 @@ function handleGesture() {
 }
 
 body.addEventListener('touchstart', function (event) {
-    touchstartX = event.changedTouches[0].screenX;
-    touchstartY = event.changedTouches[0].screenY;
-    
+  touchFingers = event.touches.length;
+  touchstartX = event.changedTouches[0].screenX;
+  touchstartY = event.changedTouches[0].screenY;
 }, false);
 
 body.addEventListener('touchend', function (event) {
+  if(touchFingers == 1) {
     touchendX = event.changedTouches[0].screenX;
     touchendY = event.changedTouches[0].screenY;
     handleGesture();
+  }
 }, false);
