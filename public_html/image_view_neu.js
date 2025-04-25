@@ -39,6 +39,15 @@ function handleGesture() {
   }
 }
 
+body.addEventListener('keydown', (event) => {
+  if(event.key == 'PageUp')
+    onLeftSwipe();
+  else if(event.key == 'PageDown')
+    onRightSwipe();
+  else if(event.key == 'Backspace')
+    onDownSwipe();
+}, false);
+
 body.addEventListener('touchstart', function (event) {
   touchFingers = event.touches.length;
   touchstartX = event.changedTouches[0].screenX;
