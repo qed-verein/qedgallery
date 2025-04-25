@@ -152,12 +152,14 @@ function regenerateThumbnails($image)
 	$imageFile = new Imagick($originalPath);
 	$imageFile->thumbnailImage(1920, 1080, true);
 	$imageFile->setFormat('jpg');
+	$imageFile->setInterlaceScheme(Imagick::INTERLACE_PLANE);
 	$imageFile->writeImage($fullhdPath);
 	$imageFile->destroy();
 
 	$imageFile = new Imagick($originalPath);
 	$imageFile->thumbnailImage(640, 480, true);
 	$imageFile->setFormat('jpg');
+	$imageFile->setInterlaceScheme(Imagick::INTERLACE_PLANE);
 	$imageFile->writeImage($normalPath);
 	$imageFile->destroy();
 
@@ -166,10 +168,6 @@ function regenerateThumbnails($image)
 	$imageFile->setFormat('jpg');
 	$imageFile->writeImage($thumbnailPath);
 	$imageFile->destroy();
-
-	#$cmd = "convert -resize 640x480 %s %s";
-	#$cmd = sprintf($cmd, escapeshellarg($originalPath), escapeshellarg($normalPath));
-	#system($cmd);
 }
 
 function rotateImage($image, $rotation)
