@@ -37,7 +37,7 @@ $layout->content .= "<h3>Nicht öffentliche Bilder</h3>";
 $layout->content .= "<ul class='menu' style='list-style-image: url(style/image.png)'>";
 foreach($images as $image)
 	$layout->content .=  sprintf("<li><a href='%s'>%s</a></li>",
-		htmlText(urlImageView($image->id)), $image->title);
+		htmlText(urlImageDetails($image->id)), $image->title);
 $layout->content .= "</ul>";
 
 

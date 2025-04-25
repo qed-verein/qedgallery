@@ -26,7 +26,7 @@ function renderAlbumEditor($album, $images, $errorMessage = '')
 				$image = $images[$i * 4 + $j];
 				
 
-				$html .= sprintf("<a href='%s'>\n", htmlText(urlImageView($image->id, $filter)));
+				$html .= sprintf("<a href='%s'>\n", htmlText(urlImageDetails($image->id, $filter)));
 				$html .= sprintf("<img src='%s' alt='%s'>\n",
 					htmlText(urlImageThumbnail($image->id)), htmlText($image->title));
 				$html .= "</a><br>\n";

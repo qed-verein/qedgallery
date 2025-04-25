@@ -48,13 +48,13 @@ class ImageRendererNeu
 			$linkFirst = "<img src='style/go-first-inactive.png' alt='Zum ersten Bild'>";
 		else
 			$linkFirst = sprintf("<a href='%s'><img src='style/go-first.png' alt='Zum ersten Bild'></a>",
-				htmlText(urlImageView($this->firstId, $this->filter)));
+				htmlText(urlImageDetails($this->firstId, $this->filter)));
 
 		if($this->image->id == $this->lastId)
 			$linkLast = "<img src='style/go-last-inactive.png' alt='Zum letzten Bild'>";
 		else
 			$linkLast = sprintf("<a href='%s'><img src='style/go-last.png' alt='Zum letzten Bild'></a>",
-				htmlText(urlImageView($this->lastId, $this->filter)));*/
+				htmlText(urlImageDetails($this->lastId, $this->filter)));*/
 
     $prevIcon = "<img width=64 src='style/go-previous.png' alt='Zum vorherigen Bild' />";
     $nextIcon = "<img width=64 src='style/go-next.png' alt='Zum nächsten Bild' />";
@@ -64,13 +64,13 @@ class ImageRendererNeu
 			$linkPrev = "";
 		else
 			$linkPrev = sprintf("<a href='%s' id='leftarrow' class='hover-button'>%s</a>\n",
-				htmlText(urlImageViewNeu($this->prevId, $this->filter)), $prevIcon);
+				htmlText(urlImageView($this->prevId, $this->filter)), $prevIcon);
 
 		if(is_null($this->nextId))
 			$linkNext = "";
 		else
 			$linkNext = sprintf("<a href='%s' id='rightarrow' class='hover-button'>%s</a>\n",
-				htmlText(urlImageViewNeu($this->nextId, $this->filter)), $nextIcon);
+				htmlText(urlImageView($this->nextId, $this->filter)), $nextIcon);
    
     $pageIndex = imageSequence($this->image, 'position', $this->filter) / IMAGES_PER_PAGE + 1;
     

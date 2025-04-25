@@ -20,7 +20,7 @@ class AlbumFormular
 
 	private function renderThumbnail($image)
 	{
-		//$html = sprintf("<a href='%s'>\n", htmlText(urlImageView($image->id, $this->filter)));
+		//$html = sprintf("<a href='%s'>\n", htmlText(urlImageDetails($image->id, $this->filter)));
 		//$html .= sprintf("<img src='%s' alt='%s'>\n",
 			//htmlText(urlImageThumbnail($image->id)), htmlText($image->title));
 		//$html .= "</a><br>\n";

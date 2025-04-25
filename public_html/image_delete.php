@@ -27,7 +27,7 @@ if(isset($_POST['yes']))
 }
 elseif(isset($_POST['no']))
 {
-	redirect(urlImageView($imageId, filterFromURL()));
+	redirect(urlImageDetails($imageId, filterFromURL()));
 }
 else
 {

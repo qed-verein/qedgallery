@@ -128,31 +128,31 @@ class ImageRenderer
 			$linkFirst = "<img src='style/go-first-inactive.png' alt='Zum ersten Bild'>";
 		else
 			$linkFirst = sprintf("<a href='%s'><img src='style/go-first.png' alt='Zum ersten Bild'></a>",
-				htmlText(urlImageView($this->firstId, $this->filter)));
+				htmlText(urlImageDetails($this->firstId, $this->filter)));
 
 		if($this->image->id == $this->lastId)
 			$linkLast = "<img src='style/go-last-inactive.png' alt='Zum letzten Bild'>";
 		else
 			$linkLast = sprintf("<a href='%s'><img src='style/go-last.png' alt='Zum letzten Bild'></a>",
-				htmlText(urlImageView($this->lastId, $this->filter)));
+				htmlText(urlImageDetails($this->lastId, $this->filter)));
 
 
 		if(is_null($this->prevId))
 			$linkPrev = "<img src='style/go-previous-inactive.png' alt='Zum vorherigen Bild'>";
 		else
 			$linkPrev = sprintf("<a href='%s'><img src='style/go-previous.png' alt='Zum vorherigen Bild'></a>",
-				htmlText(urlImageView($this->prevId, $this->filter)));
+				htmlText(urlImageDetails($this->prevId, $this->filter)));
 
 		if(is_null($this->nextId))
 			$linkNext = "<img src='style/go-next-inactive.png' alt='Zum nächsten Bild'>";
 		else
 			$linkNext = sprintf("<a href='%s'><img src='style/go-next.png' alt='Zum nächsten Bild'></a>",
-				htmlText(urlImageView($this->nextId, $this->filter)));
+				htmlText(urlImageDetails($this->nextId, $this->filter)));
 
 
 		$linkOriginal = sprintf(
-			"<a href='%s'><img src='style/view-fullscreen.png' alt='In Originalgröße anzeigen'></a>",
-				htmlText(urlImageViewNeu($this->image->id, $this->filter)));
+			"<a href='%s'><img src='style/view-fullscreen.png' alt='In Vollbild anzeigen'></a>",
+				htmlText(urlImageView($this->image->id, $this->filter)));
 
 		$linkDownload= sprintf(
 			"<a href='%s'><img src='style/document-save.png' alt='Herunterladen'></a>",
@@ -204,7 +204,7 @@ class ImageRenderer
 		if(!is_null($this->nextId))
 		{
 			$htmlImage = sprintf("<a href='%s'>%s</a>",
-				htmlText(urlImageView($this->nextId, $this->filter)), $htmlImage);
+				htmlText(urlImageDetails($this->nextId, $this->filter)), $htmlImage);
 		}
 		
 
@@ -251,7 +251,7 @@ class ImageRenderer
 
 	function renderCommentForm()
 	{
-		$html = sprintf("<form action='%s' method='post'>\n", htmlText(urlImageView($this->image->id, $this->filter)));
+		$html = sprintf("<form action='%s' method='post'>\n", htmlText(urlImageDetails($this->image->id, $this->filter)));
 		$html .= "<fieldset class='box' style='margin: auto; text-align: center'>\n";
 		$html .= "<legend>Neuen Kommentar hinzufügen</legend>\n";
 

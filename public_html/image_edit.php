@@ -55,8 +55,8 @@ if(isset($_POST['edit']))
 		$image->update();
 
 		$layout->content = formatInformation("Die Änderungen wurden gespeichert",
-			urlImageView($image->id, filterFromURL()));
-		$layout->redirectionURL = urlImageView($image->id, filterFromURL());
+			urlImageDetails($image->id, filterFromURL()));
+		$layout->redirectionURL = urlImageDetails($image->id, filterFromURL());
 	}
 	catch(InvalidInputException $e)
 	{

@@ -15,7 +15,7 @@ class AlbumRenderer
 
 	private function renderThumbnail($image)
 	{
-		$html = sprintf("<a href='%s'>\n", htmlText(urlImageView($image->id, $this->filter)));
+		$html = sprintf("<a href='%s'>\n", htmlText(urlImageDetails($image->id, $this->filter)));
 		$html .= sprintf("<img src='%s' alt='%s'>\n",
 			htmlText(urlImageThumbnail($image->id)), htmlText($image->title));
 		$html .= "</a>\n";
@@ -57,6 +57,8 @@ class AlbumRenderer
 		$pageCount = albumPageCount($this->album, $this->filter);
 
 
+		$htmlFullscreen = sprintf("<p style='text-align: center'><b><a href='%s'>Album im Vollbild anzeigen</a></b></p>\n",
+			htmlText(urlImageView($this->images[0]->id)));
 
 		if($this->page == 1)
 			$linkPrev = "<img src='style/go-previous-inactive.png' alt='Zum vorherigen Bild'>";
@@ -70,7 +72,8 @@ class AlbumRenderer
 			$linkNext = sprintf("<a href='%s'><img src='style/go-next.png' alt='Zum nächsten Bild'></a>",
 				htmlText(urlAlbumView($this->album->id, $this->filter, $this->page + 1)));
 
-		$html  = "<nav style='display: flex; flex-flow: row; justify-content: space-around'>\n";
+		$html = $htmlFullscreen;
+		$html .= "<nav style='display: flex; flex-flow: row; justify-content: space-around'>\n";
 		$html .= sprintf("<span>%s</span>\n", $linkPrev);
 		if($this->page > 0)
 			$html .= sprintf("<span>Seite %d von %d</span>", $this->page, $pageCount);
