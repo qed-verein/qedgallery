@@ -63,18 +63,18 @@ class ImageRendererNeu
 		if(is_null($this->prevId))
 			$linkPrev = "";
 		else
-			$linkPrev = sprintf("<a href='%s' id='leftarrow' class='side-hover'>%s</a>\n",
+			$linkPrev = sprintf("<a href='%s' id='leftarrow' class='hover-button'>%s</a>\n",
 				htmlText(urlImageViewNeu($this->prevId, $this->filter)), $prevIcon);
 
 		if(is_null($this->nextId))
 			$linkNext = "";
 		else
-			$linkNext = sprintf("<a href='%s' id='rightarrow' class='side-hover'>%s</a>\n",
+			$linkNext = sprintf("<a href='%s' id='rightarrow' class='hover-button'>%s</a>\n",
 				htmlText(urlImageViewNeu($this->nextId, $this->filter)), $nextIcon);
    
     $pageIndex = imageSequence($this->image, 'position', $this->filter) / IMAGES_PER_PAGE + 1;
     
-    $linkAlbum = sprintf("<a href='%s' id='backtoalbum' class='footer-hover'>%s</a>\n",
+    $linkAlbum = sprintf("<a href='%s' id='backtoalbum' class='hover-button'>%s</a>\n",
       htmlText(urlAlbumView($this->album->id, $this->filter, $pageIndex)), $albumIcon);
 
     $html = $linkPrev;

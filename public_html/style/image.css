@@ -1,8 +1,6 @@
 body {
   margin: 0px;
   background-color: black;
-  width: 100vw;
-  height: 100vh;
 }
 
 #mainimage {
@@ -19,75 +17,36 @@ body {
   height: 100vh;
 }
 
-.side-hover {
+.hover-button {
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   right: 0;
-}
-
-.side-hover:hover, .footer-hover:hover {
   background-color: rgba(128, 128, 128, 0.25);
+  opacity: 0.0;
+  transition: 0.3s;
 }
 
-.side-hover > * {
-  display: none;
+.hover-button:hover {
+  opacity: 1.0;
+}
+
+.hover-button > * {
   position: absolute;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  color: grey;
-  font-size: 10vh;
-  font-weight: bold;
-}
-
-.side-hover:hover > * {
-  display: unset;
-}
-
-.side-hover:hover > * {
-  display: unset;
 }
 
 #leftarrow {
   right: 90vw;
 }
 
-#leftarrow > * {
-  left: 50%;
-}
-
 #rightarrow {
   left: 90vw;
 }
 
-#rightarrow > * {
-  left: 50%;
-}
-
-.footer-hover {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-}
-
-.footer-hover > * {
-  display: none;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.footer-hover:hover > * {
-  display: unset;
-}
-
 #backtoalbum {
-  top: 90vh;
-}
-
-#backtoalbum > * {
-  left: 50%;
+  top: 85vh;
 }
