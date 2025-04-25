@@ -168,7 +168,10 @@ function renderImageLayout($title, $content)
 	$html .= "<link rel='stylesheet' href='style/image.css'>\n";
 	$html .= "<meta name='viewport' content='width=device-width, initial-scale=1' />";
 	$html .= "<title>" . htmlText($title) . "</title>\n";
-	$html .= "</head>\n<body>\n" . $content . "</body>\n</html>\n";
+	$html .= "</head>\n";
+	$html .= "<body>\n";
+	$html .= "<script type='text/javascript' src='image_view_neu.js'></script>\n";
+	$html .= $content . "</body>\n</html>\n";
 	return $html;
 }
 
