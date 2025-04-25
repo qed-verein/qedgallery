@@ -9,9 +9,6 @@ services:
     networks:
         - qedgallery
     working_dir: /var/www/
-    post_start:
-      - command: "docker-php-ext-install mysqli exif"
-      - command: "sh -c 'pear install mdb2 mdb2#mysqli || true'"
     depends_on:
       sql:
         condition: service_healthy
