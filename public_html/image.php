@@ -34,7 +34,7 @@ function mimeIcon($mimeType)
 	return "x-office-document.png";
 }
 
-if($type == 'normal' || $type == 'thumbnail')
+if($type == 'normal' || $type == 'thumbnail' || $type == 'fullhdbeta')
 {
 	$mimeIcon = mimeIcon($image->mimeType);
 	if($mimeIcon !== false)

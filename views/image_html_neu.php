@@ -87,7 +87,7 @@ class ImageRendererNeu
 	function renderImageBox()
 	{
     $htmlImage = sprintf("<img src='%s' alt='%s' id='mainimage'>\n",
-      htmlText(urlImageOriginal($this->image->id)),
+      htmlText(urlImageFullHd($this->image->id)),
       htmlText($this->image->title));
 
    $mimeClass = explode('/', $this->image->mimeType);

@@ -40,6 +40,8 @@ function imagePath($image, $type)
 		$filename = IMAGE_CACHE_DIR."/album_%d/image_%d_thumbnail";
 	elseif($type == 'normal')
 		$filename = IMAGE_CACHE_DIR."/album_%d/image_%d_normal";
+	elseif($type == 'fullhdbeta')
+		$filename = IMAGE_CACHE_DIR."/album_%d/image_%d_fullhd";
 	else throw new InvalidArgumentException();
 
 	return sprintf($filename, $image->albumId, $image->id);
@@ -141,10 +143,17 @@ function regenerateThumbnails($image)
 
 	$originalPath = imagePath($image, 'original');
 	$thumbnailPath = imagePath($image, 'thumbnail');
+	$fullhdPath = imagePath($image, 'fullhdbeta');
 	$normalPath = imagePath($image, 'normal');
 
 	$pathinfo = pathinfo($normalPath);
 	@mkdir($pathinfo['dirname'], 0755, true);
+
+	$imageFile = new Imagick($originalPath);
+	$imageFile->thumbnailImage(1920, 1080, true);
+	$imageFile->setFormat('jpg');
+	$imageFile->writeImage($fullhdPath);
+	$imageFile->destroy();
 
 	$imageFile = new Imagick($originalPath);
 	$imageFile->thumbnailImage(640, 480, true);

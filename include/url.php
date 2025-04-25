@@ -56,6 +56,8 @@ function urlImageNormal($imageId) {
 	return sprintf("image.php?imageid=%d&type=normal", $imageId); }
 function urlImageOriginal($imageId) {
 	return sprintf("image.php?imageid=%d&type=original", $imageId); }
+function urlImageFullHD($imageId) {
+	return sprintf("image.php?imageid=%d&type=fullhdbeta", $imageId); }
 function urlImageDownload($imageId) {
 	return sprintf("image.php?imageid=%d&type=download", $imageId); }
 
