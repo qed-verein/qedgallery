@@ -14,7 +14,8 @@ while($image->fetch())
 	{
 		if(!file_exists(imagePath($image, 'original')))
 			continue;
-		if(file_exists(imagePath($image, 'normal')) && file_exists(imagePath($image, 'thumbnail')))
+		if(file_exists(imagePath($image, 'normal')) && file_exists(imagePath($image, 'thumbnail'))
+      && file_exists(imagePath($image, 'fullhd')))
 			continue;
 	
 		if($image->mimeType == 'image/jpeg' || $image->mimeType == 'image/png')
