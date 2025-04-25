@@ -197,7 +197,7 @@ class ImageRenderer
 
 	function renderImageBox()
 	{
-		$htmlImage = sprintf("<img src='%s' alt='Bild' id='mainimage' %s'>",
+		$htmlImage = sprintf("<img src='%s' alt='%s' id='mainimage'>",
 			htmlText(urlImageNormal($this->image->id)),
 			htmlText($this->image->title));
 
@@ -208,13 +208,15 @@ class ImageRenderer
 		}
 		
 
-		$mimeClass = explode('/', $this->image->mimeType);
-		$mimeClass = $mimeClass[0];
+		$mimeType = $this->image->mimeType;
+		$mimeClass = explode('/', $mimeType)[0];
 		if($mimeClass == 'video')
 			$htmlImage = $this->renderVideoBox();
 		elseif($mimeClass == 'audio')
 			$htmlImage = $this->renderAudioBox();
-			
+    elseif($mimeClass !== 'image') {
+      $htmlImage = notSupportedFileFormat($this->image);
+    }
 		
 		$html = "<div style='text-align: center; margin: 5mm'>\n";
 		$html .= sprintf("<div>%s</div>\n", $htmlImage);

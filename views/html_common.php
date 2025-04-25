@@ -75,4 +75,13 @@ function formatQuestionYesNo($message, $action, $hidden = array())
 	return $s;
 }
 
+function notSupportedFileFormat($image) {
+  $html = "<div style='color: gray; text-align: center; font-size: 24pt'>\n";
+  $html .= "<img src='style/x-office-document.png' alt='Icon' width='200px' /><br />\n";
+  $html .= "Dieses Dokument kann hier nicht angezeigt werden.<br />\n";
+  $html .= sprintf("<b><a href='%s'>Herunterladen</a></b></div>",
+    htmlText(urlImageOriginal($image->id)));
+  return $html;
+}
+
 ?>

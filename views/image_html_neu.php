@@ -90,12 +90,15 @@ class ImageRendererNeu
       htmlText(urlImageFullHD($this->image->id)),
       htmlText($this->image->title));
 
-   $mimeClass = explode('/', $this->image->mimeType);
-   $mimeClass = $mimeClass[0];
-   if($mimeClass == 'video')
-     $htmlImage = $this->renderVideoBox();
-   elseif($mimeClass == 'audio')
-     $htmlImage = $this->renderAudioBox();
+		$mimeType = $this->image->mimeType;
+		$mimeClass = explode('/', $mimeType)[0];
+    if($mimeClass == 'video')
+      $htmlImage = $this->renderVideoBox();
+    elseif($mimeClass == 'audio')
+      $htmlImage = $this->renderAudioBox();
+    elseif($mimeClass !== 'image') {
+      $htmlImage = notSupportedFileFormat($this->image);
+    }
 
    $html = "<div class='container'>\n";
    $html .= $htmlImage;
