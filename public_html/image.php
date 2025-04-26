@@ -16,6 +16,7 @@ if($res == 0) throw new ImageNotFoundException($imageId);
 if(!testImagePermissions(PERM_VIEW, $imageId))
 	throw new AccessDeniedException();
 
+if($image->mimeType == 'image/svg+xml' && $type == 'fullhdbeta') $type = 'original';
 $filename = imagePath($image, $type);
 
 function mimeIcon($mimeType)
@@ -23,8 +24,7 @@ function mimeIcon($mimeType)
 	$mimeClass = explode('/', $mimeType);
 	$mimeClass = $mimeClass[0];
 
-	if($mimeType == 'image/jpeg' || $mimeType == 'image/png' || $mimeType == 'image/heic' || $mimeType == 'image/heif'
-     || $mimeType == 'image/svg+xml') return false;
+	if($mimeType == 'image/jpeg' || $mimeType == 'image/png' || $mimeType == 'image/heic' || $mimeType == 'image/heif') return false;
 	if($mimeType == 'text/html') return "text-html.png";
 	//if($image->mimeType == 'application/pdf') return "x-office-document.png";
 
@@ -94,8 +94,9 @@ if(isset($_SERVER['HTTP_RANGE']))
 
 if($type == 'original')
   header("Content-Type: " . $image->mimeType);
-else
+else if($type !== 'download')
   header("Content-Type: image/jpeg");
+  
 header("Cache-Control: private, max-age=604800");
 header("Expires: " . gmdate('D, d M Y H:i:s \G\M\T', time() + 604800));
 header("Pragma: cache");

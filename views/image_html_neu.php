@@ -100,9 +100,10 @@ class ImageRendererNeu
       $htmlImage = notSupportedFileFormat($this->image);
     }
 
-   $html = "<div class='container'>\n";
-   $html .= $htmlImage;
-   $html .= "</div>\n"; 
+    $bgcolor = $mimeType == 'image/svg+xml' ? 'gray' : 'black';
+    $html = sprintf("<div class='container' style='background-color: %s'>\n", $bgcolor);
+    $html .= $htmlImage;
+    $html .= "</div>\n"; 
 
 		return $html;
 	}
