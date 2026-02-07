@@ -116,8 +116,9 @@ class AlbumRenderer
 		foreach($owners as $owner)
 		{
 			$filter = array('byowner' => $owner->id);
+			$username = $owner ? $owner->username : "Unbekannter Benutzer";
 			$link = sprintf("<a href='%s'>Bilder von %s</a>\n",
-				htmlText(urlAlbumView($this->album->id, $filter)), htmlText($owner->username));
+				htmlText(urlAlbumView($this->album->id, $filter)), htmlText($username));
 			if(isset($this->filter['byowner']) && $owner->id == $this->filter['byowner'])
 				$link = "<b>" . $link . "</b>";
 			$html .= "<li>" . $link . "</li>\n";
