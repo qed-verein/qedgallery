@@ -10,7 +10,7 @@ function exceptionHandler($exception) {
 set_exception_handler('exceptionHandler');
 
 
-if(!userIsMember($gUser)) throw new Exception("Zugriff wurde verweigert.");
+if(!userIsVisitor($gUser)) throw new Exception("Zugriff wurde verweigert.");
 if(!isset($_POST['name'])) throw new Exception("Ungültiger Dateiname.");
 $name = $_POST['name'];
 
