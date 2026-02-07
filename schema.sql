@@ -47,5 +47,17 @@ CREATE TABLE user (
 	rank INT NOT NULL
 );
 
+CREATE TABLE user_album_permission (
+	userId INT NOT NULL,
+	albumId INT NOT NULL,
+	permission INT NOT NULL
+);
+
 INSERT INTO user (id, username, password, rank) VALUES
 	(1, 'qedgallery', '0116fd4ce729731f2af07e2d81d73f60edf1e25f', 3);
+
+INSERT INTO album (id, ownerId, title, description, creationTime, originalFrom, originalTill, rights) VALUES
+	(1, 1, "Testalbum", "Dies ist ein Testalbum", UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 1);
+
+INSERT INTO user_album_permission (userId, albumId, permission) VALUES
+	(1, 1, 3);
