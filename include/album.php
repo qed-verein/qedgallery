@@ -36,8 +36,12 @@ function imageOwnerList($album)
 	$image->find();
 	$owners = array();
 	while($image->fetch())
-		$owners[] = $image->getLink('ownerId');
-	return $owners;
+	{
+		$owner = $image->getLink('ownerId');
+		if($owner === false) continue;
+		$owners[] = $owner;
+	}
+  return $owners;
 }
 
 
