@@ -174,9 +174,9 @@ function albumPermissionDescriptions()
 {
 	return array(
 		"Dieses Album ist privat.",
-		"Andere Mitglieder dürfen dieses Album anschauen.",
-		"Andere Mitglieder dürfen weitere Bilder hochladen.",
-		"Andere Mitglieder dürfen alle Bilder bearbeiten.");
+		"Andere Personen dürfen dieses Album anschauen.",
+		"Andere Personen dürfen weitere Bilder hochladen.",
+		"Andere Personen dürfen alle Bilder bearbeiten.");
 }
 
 ?>

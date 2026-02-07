@@ -102,8 +102,8 @@ class ImageRenderer
 		// TODO: Rechtestatus bereits anzeigen, falls Bearbeitungsrechte für das Bild vorliegen
 		if(testImagePermissions(PERM_EDIT, $this->image->id, $gUser))
 		{
-			$html .= sprintf("<tr><th>Freigegeben:</th><td>%s</td></tr>\n",
-				$this->image->rights ? "Für alle Mitglieder" : "Nicht Freigegeben");
+			$html .= sprintf("<tr><th>Zugriffsrechte:</th><td>%s</td></tr>\n",
+				$this->image->rights ? "Öffentlich" : "Privat");
 		}
 		$html .= "</table>\n";
 
