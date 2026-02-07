@@ -74,22 +74,38 @@ function userIsAdmin($user) {return $user->rank >= RANK_ADMIN;}
 // 2) Adminstratoren können alle Alben anschauen und bearbeiten.
 // 3) Der Besitzer eines Albums verfügt ebenfalls über alle Rechte für dieses Album.
 // 4) Mitglieder dürfen ebenfalls ein Album sehen/ergänzen/bearbeiten, sofern dies vom Besitzer erlaubt wurde.
-// 5) Besucher sehen ebenfalls die Alben, welche die Mitglieder sehen können,
-//      verfügen aber im Gegensatz zu Mitgliedern nur über Leserechte.
+// 5) Besucher sind allerdings auf von ihnen besuchte Veranstaltung eingeschränkt.
+//    Dort haben sie die gleichen Rechte wie Mitglieder
+
+function albumPermissionSQL($user, $action) {
+	if($user->id == USER_ANONYMOUS_ID)
+		return "FALSE";
+
+	$sqlAlbumOwner = sprintf('(album.ownerId = %d)', $user->id);
+
+	$requiredAlbumRights = 0;
+	if($action & PERM_VIEW) $requiredAlbumRights = 1;
+	elseif($action & PERM_UPLOAD) $requiredAlbumRights = 2;
+	elseif($action & PERM_EDIT) $requiredAlbumRights = 3;
+	$sqlAlbumRights = sprintf('(album.rights >= %d)', $requiredAlbumRights);
+
+	$sqlUserAlbumRights = sprintf('EXISTS(SELECT * FROM user_album_permission AS uap ' .
+		'WHERE uap.userId = %d AND uap.albumId = album.id AND uap.permission >= %d)',
+		$user->id, $requiredAlbumRights);
+
+	if($user->rank == RANK_ADMIN)
+		return "TRUE";
+	elseif($user->rank == RANK_MEMBER)
+		return $sqlAlbumOwner . " OR " . $sqlAlbumRights;
+	elseif($user->rank == RANK_VISITOR)
+		return $sqlAlbumOwner . " OR " . "(" . $sqlAlbumRights . " AND " . $sqlUserAlbumRights . ")";
+	else
+		return "FALSE";
+}
 
 function handleAlbumPermissions($album, $user, $action = PERM_VIEW)
 {
-	if($user->id == USER_ANONYMOUS_ID) {
-		$album->whereAdd('FALSE'); return;}
-	if(($action & (PERM_UPLOAD | PERM_EDIT)) && $user->rank < RANK_MEMBER) {
-		$album->whereAdd('FALSE'); return;}
-
-	if(($action & PERM_VIEW) && $user->rank <= RANK_MEMBER)
-		$album->whereAdd(sprintf('rights >= 1 OR ownerId = %d', $user->id));
-	if(($action & PERM_UPLOAD) && $user->rank <= RANK_MEMBER)
-		$album->whereAdd(sprintf('rights >= 2 OR ownerId = %d', $user->id));
-	if(($action & PERM_EDIT) && $user->rank <= RANK_MEMBER)
-		$album->whereAdd(sprintf('rights >= 3 OR ownerId = %d', $user->id));
+	$album->whereAdd(albumPermissionSQL($user, $action));
 }
 
 // Die Rechte für ein Bild werden wie folgt bestimmt:
@@ -98,21 +114,32 @@ function handleAlbumPermissions($album, $user, $action = PERM_VIEW)
 // 3) Bilder eines Albums können gesperrt werden. In diesem Fall ist das Bild nur noch für
 //       Leute mit Bearbeitungsrechten sichtbar.
 
-function handleImagePermissions($image, $user, $action = PERM_VIEW)
-{
-	if($user->id == USER_ANONYMOUS_ID) {
-		$image->whereAdd('FALSE'); return;}
-	if(($action & PERM_EDIT) && $user->rank < RANK_MEMBER) {
-		$image->whereAdd('FALSE'); return;}
-		
-	$whereSql = "ownerId = %d OR EXISTS(SELECT album.id FROM album WHERE album.id = image.albumId AND
-		(album.ownerId = %d OR album.rights >= 3 %s))";
-	if(($action & PERM_VIEW) && $user->rank <= RANK_MEMBER)
-		$image->whereAdd(sprintf($whereSql, $user->id, $user->id, "OR (image.rights >= 1 AND album.rights >= 1)"));
-	if(($action & PERM_EDIT) && $user->rank <= RANK_MEMBER)
-		$image->whereAdd(sprintf($whereSql, $user->id, $user->id, ""));
+function imagePermissionSQL($user, $action) {
+	if($user->id == USER_ANONYMOUS_ID)
+		return "FALSE";
+	if($user->rank == RANK_ADMIN)
+		return "TRUE";
+
+	if($user->rank == RANK_MEMBER || $user->rank == RANK_VISITOR)
+	{
+		$sqlAlbumCondition = sprintf("EXISTS(SELECT * FROM album WHERE album.id = image.albumId AND (%s))",
+			albumPermissionSQL($user, $action));
+		$sqlImageOwner = sprintf('(image.ownerId = %d)', $user->id);
+		$sqlImagePublic = sprintf('(image.rights = 1)', $user->id);
+
+		if($action & PERM_EDIT)
+			return $sqlImageOwner . " OR " . $sqlAlbumCondition;
+		elseif($action & PERM_VIEW)
+			return $sqlImageOwner . " OR " . "(" . $sqlAlbumCondition . " AND ".  $sqlImagePublic . ")";
+		else return "TRUE";
+	}
+	return "FALSE";
 }
 
+function handleImagePermissions($image, $user, $action = PERM_VIEW)
+{
+	$image->whereAdd(imagePermissionSQL($user, $action));
+}
 
 function testAlbumPermissions($action, $albumId = null, $user = null)
 {
@@ -145,8 +172,11 @@ function testImagePermissions($action, $imageId, $user = null)
 
 function albumPermissionDescriptions()
 {
-	return array("Dieses Album ist privat.", "Andere Mitglieder dürfen dieses Album anschauen.",
-		"Andere Mitglieder dürfen weitere Bilder hochladen.", "Andere Mitglieder dürfen alle Bilder bearbeiten.");
+	return array(
+		"Dieses Album ist privat.",
+		"Andere Mitglieder dürfen dieses Album anschauen.",
+		"Andere Mitglieder dürfen weitere Bilder hochladen.",
+		"Andere Mitglieder dürfen alle Bilder bearbeiten.");
 }
-		
+
 ?>
