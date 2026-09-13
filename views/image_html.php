@@ -66,15 +66,15 @@ class ImageRenderer
 			$html .= sprintf("<tr><th>Belichtungszeit:</th><td>%s</td></tr>\n", htmlText($exif['ExposureTime']));
 		if(isset($exif['ISOSpeedRatings']))
 			$html .= sprintf("<tr><th>ISO-Wert:</th><td>%s</td></tr>\n", htmlText(json_encode($exif['ISOSpeedRatings'])));
-		if(isset($exif['GPSLongitude']))
+		if(isset($exif['GPSLatitude']) && isset($exif['GPSLatitudeRef']) && isset($exif['GPSLongitude']) && isset($exif['GPSLongitudeRef']))
 			$html .= sprintf("<tr><th>Koordiante:</th><td>%.6F°, %.6F°</td></tr>\n",
 				gps($exif['GPSLatitude'], $exif['GPSLatitudeRef']), gps($exif['GPSLongitude'], $exif['GPSLongitudeRef']));
 		if(isset($exif['Flash']))
 			$html .= sprintf("<tr><th>Blitz benutzt:</th><td>%s</td></tr>\n", htmlText($exif['Flash']));
 
-			
+
 		return $html;
-		
+
 	}
 
 	private function renderImageInfos()
